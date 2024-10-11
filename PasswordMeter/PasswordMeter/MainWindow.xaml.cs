@@ -73,6 +73,13 @@ namespace PasswordMeter
                 string generatedPassword = generatePassword(username, password);
 
                 resultTextBlock.Text = "Wachtwoord niet OK - " + generatedPassword;
+
+                MessageBoxResult answer = MessageBox.Show($"Uw voorgesteld ww: {generatedPassword}. Wil je deze gebruiken?", "Generated Password", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes);
+                if (answer == MessageBoxResult.Yes)
+                {
+                    passwordTextBox.Text = generatedPassword;
+                }
+                
                 resultTextBlock.Foreground = Brushes.Red;
             }
         }
