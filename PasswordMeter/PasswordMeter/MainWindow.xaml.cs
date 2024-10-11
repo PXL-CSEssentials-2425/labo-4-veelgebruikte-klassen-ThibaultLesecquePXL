@@ -70,9 +70,44 @@ namespace PasswordMeter
             }
             else
             {
-                resultTextBlock.Text = "Wachtwoord niet OK";
+                string generatedPassword = generatePassword(username, password);
+
+                resultTextBlock.Text = "Wachtwoord niet OK - " + generatedPassword;
                 resultTextBlock.Foreground = Brushes.Red;
             }
+        }
+
+        private string generatePassword(string username, string password)
+        {
+            // Aanmaken Objects
+            StringBuilder sb = new StringBuilder();
+            Random rnd = new Random();
+
+            // Pak 5 random letters uit username
+            for (int i = 0; i < 5; i++)
+            {
+                int randomInt = rnd.Next(0, username.Length);
+                string randomString = username.Substring(randomInt, 1);
+
+                sb.Append(randomString.ToLower());
+            }
+
+            // Pak 5 random getallen
+            for (int i = 0; i < 5; i++)
+            {
+                int randomInt = rnd.Next(1, 10);
+                sb.Append(randomInt);
+            }
+
+            // Voeg random (tussen 1 en 5) x een uitroepteken toe
+            int random = rnd.Next(1, 6);
+            for (int i = 0; i < random; i++)
+            {
+                sb.Append("!");
+            }
+
+            // StringBuilder omzetten naar string en retourneren
+            return sb.ToString();
         }
     }
 }
