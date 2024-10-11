@@ -43,6 +43,7 @@ namespace PasswordMeter
 
             bool containsUsername = password.Contains(username);
             bool containsDigit = false;
+            bool contains10Char = password.Length >= 10;
 
             for (int i = 0; i < password.Length; i++)
             {
@@ -57,7 +58,14 @@ namespace PasswordMeter
                 }
             }
 
-            resultTextBlock.Text = containsDigit.ToString();
+            if (!containsUsername && containsDigit && contains10Char)
+            {
+                resultTextBlock.Text = "Wachtwoord OK!";
+            }
+            else
+            {
+                resultTextBlock.Text = "Wachtwoord niet OK!";
+            }
         }
     }
 }
