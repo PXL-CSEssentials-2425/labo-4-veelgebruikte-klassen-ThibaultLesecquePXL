@@ -61,10 +61,17 @@ namespace PasswordMeter
             if (!containsUsername && containsDigit && contains10Char)
             {
                 resultTextBlock.Text = "Wachtwoord OK!";
+                resultTextBlock.Foreground = Brushes.Green;
+            }
+            else if ((!containsUsername && containsDigit) || (!containsUsername && contains10Char) || (containsDigit && contains10Char))
+            {
+                resultTextBlock.Text = "Wachtwoord bijna OK!";
+                resultTextBlock.Foreground = Brushes.Orange;
             }
             else
             {
-                resultTextBlock.Text = "Wachtwoord niet OK!";
+                resultTextBlock.Text = "Wachtwoord niet OK";
+                resultTextBlock.Foreground = Brushes.Red;
             }
         }
     }
