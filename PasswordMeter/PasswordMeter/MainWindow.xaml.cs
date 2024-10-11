@@ -25,6 +25,9 @@ namespace PasswordMeter
         /// Output veld: resultTextBlock
         /// </summary>
 
+        string username;
+        string password;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -32,7 +35,29 @@ namespace PasswordMeter
 
         private void passwordMeterButton_Click(object sender, RoutedEventArgs e)
         {
+            username = userNameTextBox.Text;
+            password = passwordTextBox.Text;
 
+            username = username.Trim();
+            password = password.Trim();
+
+            bool containsUsername = password.Contains(username);
+            bool containsDigit = false;
+
+            for (int i = 0; i < password.Length; i++)
+            {
+                char letter;
+                string eerstVolgendeLetter = password.Substring(i, 1);
+                letter = char.Parse(eerstVolgendeLetter);
+
+                if (char.IsDigit(letter))
+                {
+                    containsDigit = true;
+                    break;
+                }
+            }
+
+            resultTextBlock.Text = containsDigit.ToString();
         }
     }
 }
